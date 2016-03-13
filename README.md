@@ -27,11 +27,11 @@ window.addEventListener('load', function(){
 </html>
 ```
 
-1. simpleSuggest.js$B$*$h$S(BsimpleSuggest.css$B$rFI$_9~$^$;$^$9!#(B
-2. $BJd40$7$?$$J8;zNs$r3JG<$7$?G[Ns$rDj5A$7$^$9!#(B
-3. new simpleSuggest$B$7$^$9!#(B
-4. addSuggest(inputElement, stringList)$B$G(BinputElement$B$K(Bsuggest$B%$%Y%s%H$,DI2C$5$l$^$9!#(B
+1. simpleSuggest.jsおよびsimpleSuggest.cssを読み込ませます。
+2. 補完したい文字列を格納した配列を定義します。
+3. new simpleSuggestします。
+4. addSuggest(inputElement, stringList)でinputElementにsuggestイベントが追加されます。
 
 # caution
 
-$B%(%i!<$rJV$9=hM}$J$I$O$^$@Dj5A$7$F$$$^$;$s!#(B
+エラーを返す処理などはまだ定義していません。
