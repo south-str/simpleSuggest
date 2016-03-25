@@ -7,6 +7,7 @@
 
   //Header
   simpleSuggest["prototype"]["addSuggest"] = addSuggest;
+  simpleSuggest["prototype"]["addRemoveSuggest"] = addRemoveSuggest;
 
   //Implementation
   function addSuggest(inputElement, list) {
@@ -53,19 +54,21 @@
         }
       }, false); //addEvent keydown
 
-      document.addEventListener('click', function(e){
-        var suggestDiv = document.getElementById('suggest');
-        if(suggestDiv !== null){
-          var isSuggestDiv = (e.target === suggestDiv) ? true : false;
-          var isSuggestList = isTargetSuggestList(e.target, suggestDiv);
-          var isSuggestListElement = isTargetSuggestListElements(e.target, suggestDiv);
-          var isInputElement = (e.target === inputElement) ? true : false;
-          if(!isSuggestDiv && !isSuggestList && !isSuggestListElement && !isInputElement){
-            suggestDiv.parentNode.removeChild(suggestDiv);
-          }
-        }
-      }, false); //addEvent click
       //}); //addEvent load
+  }
+
+  function addRemoveSuggest(){
+    document.addEventListener('click', function(e){
+      var suggestDiv = document.getElementById('suggest');
+      if(suggestDiv !== null){
+        var isSuggestDiv = (e.target === suggestDiv) ? true : false;
+        var isSuggestList = isTargetSuggestList(e.target, suggestDiv);
+        var isSuggestListElement = isTargetSuggestListElements(e.target, suggestDiv);
+        if(!isSuggestDiv && !isSuggestList && !isSuggestListElement){
+          suggestDiv.parentNode.removeChild(suggestDiv);
+        }
+      }
+    }, false); //addEvent click
   }
 
   //Helper
