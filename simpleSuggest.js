@@ -13,8 +13,8 @@
   function addSuggest(inputElement, list) {
     //window.addEventListener('load', function(){
       inputElement.addEventListener('input', function(){
-        var suggestDiv = document.getElementById('suggest');
-        var searchedList = searchList(inputElement.value, list);
+        var suggestDiv = document.getElementById('suggest'),
+          searchedList = searchList(inputElement.value, list);
         if(suggestDiv !== null) suggestDiv.parentNode.removeChild(suggestDiv);
         if(inputElement.value !== ''){
           if(searchedList.length !== 0){
@@ -26,30 +26,33 @@
       }, false);  //addEvent input
 
       inputElement.addEventListener('keydown', function(e){
-        var suggestDiv = document.getElementById('suggest');
-        if(suggestDiv === null && inputElement.value !== ''){
-          var searchedList = searchList(inputElement.value, list);
-          var suggest = createSuggest(inputElement, searchedList);
-          inputElement.parentNode.appendChild(suggest);
-          setSuggestStyle(suggest, inputElement);
-        }else if(suggestDiv !== null){
-          var suggestListElements = suggestDiv.firstChild.childNodes;
-          var activeElement = document.activeElement;
-          var activeElementsList = Array.prototype.filter.call(suggestListElements, function(elem){
-            return activeElement === elem;
-          });
-          if(activeElementsList.length === 0 && suggestDiv !== null){
-            if(e.keyIdentifier === 'Down'){
-              suggestDiv.firstChild.firstChild.focus();
-              e.preventDefault();
-            }
-            if(e.keyIdentifier === 'Up'){
-              suggestDiv.firstChild.lastChild.focus();
-              e.preventDefault();
-            }
+        var suggestDiv = document.getElementById('suggest'),
+        searchedList = searchList(inputElement.value, list),
+        suggest = createSuggest(inputElement, searchedList);
+        if(e.keyIdentifier === 'Up'){
+          if(suggestDiv !== null){
+            suggestDiv.firstChild.lastChild.focus();
+            e.preventDefault();
+          }else if(inputElement.value !== '' && searchedList.length > 0){
+            inputElement.parentNode.appendChild(suggest);
+            setSuggestStyle(suggest, inputElement);
+            e.preventDefault();
+          }
+        }
+        if(e.keyIdentifier === 'Down'){
+          if(suggestDiv !== null){
+            suggestDiv.firstChild.firstChild.focus();
+            e.preventDefault();
+          }else if(inputElement.value !== '' && searchedList.length > 0){
+            inputElement.parentNode.appendChild(suggest);
+            setSuggestStyle(suggest, inputElement);
+            e.preventDefault();
           }
         }
         if(e.keyIdentifier === 'U+001B' /*Esc*/){
+          if(suggestDiv !== null) inputElement.parentNode.removeChild(suggestDiv);
+        }
+        if(e.keyIdentifier === 'U+0009' /*Tab*/){
           if(suggestDiv !== null) inputElement.parentNode.removeChild(suggestDiv);
         }
       }, false); //addEvent keydown
@@ -117,6 +120,10 @@
         }
         if(e.keyIdentifier === 'U+001B' /*Esc*/){
           inputElement.parentNode.removeChild(suggestDiv);
+          inputElement.focus();
+          e.preventDefault();
+        }
+        if(e.keyIdentifier === 'U+0009' /*Tab*/){
           inputElement.focus();
           e.preventDefault();
         }
