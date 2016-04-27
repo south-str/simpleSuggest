@@ -6,17 +6,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="../json/equipment.js"></script>
   <script src="simpleSuggest.js"></script>
   <script>
-window.addEventListener('load', function(){
-    var suggest = new simpleSuggest;
-    var list = ['JavaScript','JSON','Japan'];
-    Array.prototype.forEach.call(document.getElementsByClassName('simpleSuggest'), function(x){
-        suggest.addSuggest(x,eq);
-        });
+    window.addEventListener('load', function(){
+      var suggest = new simpleSuggest;
+      var list = ['JavaScript','JSON','Japan'];
+      Array.prototype.forEach.call(document.getElementsByClassName('simpleSuggest'), function(x){
+        suggest.addSuggest(x,list);
+      });
     });
-suggest.addRemoveSuggest();
+    suggest.addRemoveSuggest();
   </script>
   <link rel="stylesheet" href="simpleSuggest.css" type="text/css">
 </head>
