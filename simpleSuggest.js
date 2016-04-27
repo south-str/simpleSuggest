@@ -163,8 +163,7 @@
         document.body.appendChild(test);
         scrollbarWidth = + window.getComputedStyle(test, null).getPropertyValue('width').match(/[0-9]*/g).reduce(function(x,y){return x+y;});
         document.body.removeChild(test);
-        suggestDiv.style.width = suggestDiv.firstChild.firstChild.getBoundingClientRect().width + scrollbarWidth + 'px';
-        //console.log(suggestDiv.style.width, suggestDiv.firstChild.firstChild.getBoundingClientRect().width,scrollbarWidth );
+        suggestDiv.style.width = suggestDiv.offsetWidth + scrollbarWidth + 'px';
       }
       if(window.innerHeight < suggestDivHeight + inputRect.bottom){
         suggestDiv.style.top = inputRect.top + window.pageYOffset - suggestDivHeight + 'px';
